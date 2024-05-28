@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Dashboard from './components/Dashboard';
+import Header from './components/Header';
+import LoginForm from './components/LoginForm';
+import ProtectedRoute from './components/ProtectedRoute';
+import SignUpForm from './components/SignUpForm';
+import Tempelate from './components/Tempelate';
+import {Route,Routes, BrowserRouter} from "react-router-dom"
 
 function App() {
   return (
+    <>
+    <Header/>
+   
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <Routes>
+        <Route element={<Tempelate/>}>
+            <Route index element={<LoginForm/>}/>
+            <Route path='/signup' element={<SignUpForm/>}/>
+          </Route>
+        <Route path='/dashboard' element={
+          <ProtectedRoute>
+        <Dashboard/>
+        </ProtectedRoute>}/>
+       </Routes>
     </div>
+  
+    </>
   );
 }
 
